@@ -4,7 +4,6 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
-    # Note: network_mode: host does NOT work on Windows Docker. Use ports.
     ports:
       - "8096:8096"
     volumes:
@@ -51,4 +50,21 @@ services:
       - "9696:9696"
     volumes:
       - ./data/prowlarr:/config
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Bratislava
+      - WEBUI_PORT=8080
+    ports:
+      - "8080:8080"
+      - "6881:6881"
+      - "6881:6881/udp"
+    volumes:
+      - ./data/qbittorrent:/config
+      - ./library:/media
     restart: unless-stopped
