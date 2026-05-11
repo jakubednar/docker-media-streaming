@@ -1,0 +1,67 @@
+# #############################################################################
+# INSTRUCTIONS:
+# 1. Replace 192.168.1.42 with your actual server IP (same as in .env)
+# 2. Replace YOUR_*_API_KEY with real API keys from each app
+# 3. Replace YOUR_QBIT_PASSWORD with your qBittorrent Web UI password
+# #############################################################################
+
+- Media:
+    - Jellyfin:
+        href: http://192.168.1.42:8096
+        description: Movies & TV
+        icon: jellyfin
+        widget:
+          type: jellyfin
+          url: http://192.168.1.42:8096
+          key: YOUR_JELLYFIN_API_KEY
+          enableNowPlaying: true
+          enableBlocks: true
+
+- Management:
+    - Radarr:
+        href: http://192.168.1.42:7878
+        description: Movies
+        icon: radarr
+        widget:
+          type: radarr
+          url: http://192.168.1.42:7878
+          key: YOUR_RADARR_API_KEY
+          enableQueue: true
+
+    - Sonarr:
+        href: http://192.168.1.42:8989
+        description: TV Shows
+        icon: sonarr
+        widget:
+          type: sonarr
+          url: http://192.168.1.42:8989
+          key: YOUR_SONARR_API_KEY
+          enableQueue: true
+
+    - Prowlarr:
+        href: http://192.168.1.42:9696
+        description: Indexers
+        icon: prowlarr
+
+- Download:
+    - qBittorrent:
+        href: http://192.168.1.42:8080
+        description: Torrents
+        icon: qbittorrent
+        widget:
+          type: qbittorrent
+          url: http://192.168.1.42:8080
+          username: admin
+          password: YOUR_QBIT_PASSWORD
+          enableQueue: true
+
+- System:
+    - Portainer:
+        href: http://192.168.1.42:9000
+        description: Docker Manager
+        icon: portainer
+        widget:
+          type: portainer
+          url: http://192.168.1.42:9000
+          key: YOUR_PORTAINER_API_KEY
+          enableStatus: true

@@ -1,0 +1,13 @@
+# Top-row widgets (system stats + search)
+
+- resources:
+    label: System
+    cpu: true
+    memory: true
+    disk: /
+    expanded: true
+
+- search:
+    provider: duckduckgo
+    target: _blank
+    placeholder: Search...

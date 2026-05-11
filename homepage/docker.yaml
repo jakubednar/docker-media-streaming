@@ -1,0 +1,6 @@
+# Auto-discovery: Homepage reads Docker labels from containers
+# and merges them with services.yaml.
+# The labels are already defined in docker-compose.yml above.
+
+# Socket path (default)
+# socket: /var/run/docker.sock

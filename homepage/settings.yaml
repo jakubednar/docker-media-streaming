@@ -1,0 +1,30 @@
+# Homepage global settings
+title: Media Server
+
+# Theme: slate, gray, zinc, neutral, stone, amber, yellow, lime, green,
+#        emerald, teal, cyan, sky, blue, indigo, violet, purple, fuchsia, pink, rose, red, orange
+theme: dark
+color: slate
+
+# Layout: auto, row, column
+layout:
+  Media:
+    style: row
+    columns: 4
+  Management:
+    style: row
+    columns: 4
+  Download:
+    style: row
+    columns: 4
+  System:
+    style: row
+    columns: 4
+
+# Optional: use background image
+# background:
+#   image: https://images.unsplash.com/photo-1506744038136-46273834b3fb
+#   blur: sm
+#   saturate: 50
+#   brightness: 50
+#   opacity: 50
