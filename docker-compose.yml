@@ -4,6 +4,16 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
+    labels:
+      - homepage.group=Media
+      - homepage.name=Jellyfin
+      - homepage.icon=jellyfin
+      - homepage.href=http://${SERVER_IP}:8096
+      - homepage.description=Movies & TV
+      - homepage.widget.type=jellyfin
+      - homepage.widget.url=http://${SERVER_IP}:8096
+      - homepage.widget.key=YOUR_JELLYFIN_API_KEY
+      - homepage.widget.enableNowPlaying=true
     ports:
       - "8096:8096"
     volumes:
@@ -14,10 +24,19 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
+    labels:
+      - homepage.group=Management
+      - homepage.name=Radarr
+      - homepage.icon=radarr
+      - homepage.href=http://${SERVER_IP}:7878
+      - homepage.description=Movies
+      - homepage.widget.type=radarr
+      - homepage.widget.url=http://${SERVER_IP}:7878
+      - homepage.widget.key=YOUR_RADARR_API_KEY
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Bratislava
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     ports:
       - "7878:7878"
     volumes:
@@ -28,10 +47,19 @@ services:
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
+    labels:
+      - homepage.group=Management
+      - homepage.name=Sonarr
+      - homepage.icon=sonarr
+      - homepage.href=http://${SERVER_IP}:8989
+      - homepage.description=TV Shows
+      - homepage.widget.type=sonarr
+      - homepage.widget.url=http://${SERVER_IP}:8989
+      - homepage.widget.key=YOUR_SONARR_API_KEY
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Bratislava
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     ports:
       - "8989:8989"
     volumes:
@@ -42,10 +70,16 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
+    labels:
+      - homepage.group=Management
+      - homepage.name=Prowlarr
+      - homepage.icon=prowlarr
+      - homepage.href=http://${SERVER_IP}:9696
+      - homepage.description=Indexers
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Bratislava
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     ports:
       - "9696:9696"
     volumes:
@@ -55,10 +89,20 @@ services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
+    labels:
+      - homepage.group=Download
+      - homepage.name=qBittorrent
+      - homepage.icon=qbittorrent
+      - homepage.href=http://${SERVER_IP}:8080
+      - homepage.description=Torrents
+      - homepage.widget.type=qbittorrent
+      - homepage.widget.url=http://${SERVER_IP}:8080
+      - homepage.widget.username=admin
+      - homepage.widget.password=YOUR_QBIT_PASSWORD
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Bratislava
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
       - WEBUI_PORT=8080
     ports:
       - "8080:8080"
@@ -69,11 +113,30 @@ services:
       - ./library:/media
     restart: unless-stopped
 
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    labels:
+      - homepage.group=System
+      - homepage.name=Portainer
+      - homepage.icon=portainer
+      - homepage.href=http://${SERVER_IP}:9000
+      - homepage.description=Docker Manager
+    ports:
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data/portainer:/data
+    restart: unless-stopped
+
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
     ports:
       - "3000:3000"
     volumes:
       - ./data/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
