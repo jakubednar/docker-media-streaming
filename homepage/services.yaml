@@ -1,60 +1,64 @@
 - Media:
     - Jellyfin:
-        href: http://${SERVER_IP}:8096
+        href: http://{{HOMEPAGE_VAR_SERVER_IP}}:8096
         description: Movies & TV
         icon: jellyfin
         widget:
           type: jellyfin
-          url: http://${SERVER_IP}:8096
-          key: ${JELLYFIN_API_KEY}
+          url: http://{{HOMEPAGE_VAR_SERVER_IP}}:8096
+          key: {{HOMEPAGE_VAR_JELLYFIN_API_KEY}}
           enableNowPlaying: true
           enableBlocks: true
 
 - Management:
     - Radarr:
-        href: http://${SERVER_IP}:7878
+        href: http://{{HOMEPAGE_VAR_SERVER_IP}}:7878
         description: Movies
         icon: radarr
         widget:
           type: radarr
-          url: http://${SERVER_IP}:7878
-          key: ${RADARR_API_KEY}
+          url: http://{{HOMEPAGE_VAR_SERVER_IP}}:7878
+          key: {{HOMEPAGE_VAR_RADARR_API_KEY}}
           enableQueue: true
 
     - Sonarr:
-        href: http://${SERVER_IP}:8989
+        href: http://{{HOMEPAGE_VAR_SERVER_IP}}:8989
         description: TV Shows
         icon: sonarr
         widget:
           type: sonarr
-          url: http://${SERVER_IP}:8989
-          key: ${SONARR_API_KEY}
+          url: http://{{HOMEPAGE_VAR_SERVER_IP}}:8989
+          key: {{HOMEPAGE_VAR_SONARR_API_KEY}}
           enableQueue: true
 
     - Prowlarr:
-        href: http://${SERVER_IP}:9696
+        href: http://{{HOMEPAGE_VAR_SERVER_IP}}:9696
         description: Indexers
         icon: prowlarr
+        widget:
+          type: prowlarr
+          url: http://{{HOMEPAGE_VAR_SERVER_IP}}:9696
+          key: {{HOMEPAGE_VAR_PROWLARR_API_KEY}}
 
 - Download:
     - qBittorrent:
-        href: http://${SERVER_IP}:8080
+        href: http://{{HOMEPAGE_VAR_SERVER_IP}}:8080
         description: Torrents
         icon: qbittorrent
         widget:
           type: qbittorrent
-          url: http://${SERVER_IP}:8080
+          url: http://{{HOMEPAGE_VAR_SERVER_IP}}:8080
           username: admin
-          password: ${QBIT_PASSWORD}
+          password: {{HOMEPAGE_VAR_QBIT_PASSWORD}}
           enableQueue: true
 
 - System:
     - Portainer:
-        href: http://${SERVER_IP}:9000
+        href: http://{{HOMEPAGE_VAR_SERVER_IP}}:9000
         description: Docker Manager
         icon: portainer
         widget:
           type: portainer
-          url: http://${SERVER_IP}:9000
-          key: ${PORTAINER_API_KEY}
+          url: http://{{HOMEPAGE_VAR_SERVER_IP}}:9000
+          key: {{HOMEPAGE_VAR_PORTAINER_API_KEY}}
           enableStatus: true
