@@ -67,6 +67,7 @@ services:
     volumes:
       - ./data/qbittorrent:/config
       - ./library:/media
+      - ./qbittorrent-init:/config/custom-cont-init.d:ro  # ← NEW
     restart: unless-stopped
 
   portainer:
