@@ -4,16 +4,6 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin
-    labels:
-      - homepage.group=Media
-      - homepage.name=Jellyfin
-      - homepage.icon=jellyfin
-      - homepage.href=http://${SERVER_IP}:8096
-      - homepage.description=Movies & TV
-      - homepage.widget.type=jellyfin
-      - homepage.widget.url=http://${SERVER_IP}:8096
-      - homepage.widget.key=YOUR_JELLYFIN_API_KEY
-      - homepage.widget.enableNowPlaying=true
     ports:
       - "8096:8096"
     volumes:
@@ -24,15 +14,6 @@ services:
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
-    labels:
-      - homepage.group=Management
-      - homepage.name=Radarr
-      - homepage.icon=radarr
-      - homepage.href=http://${SERVER_IP}:7878
-      - homepage.description=Movies
-      - homepage.widget.type=radarr
-      - homepage.widget.url=http://${SERVER_IP}:7878
-      - homepage.widget.key=YOUR_RADARR_API_KEY
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -47,15 +28,6 @@ services:
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
-    labels:
-      - homepage.group=Management
-      - homepage.name=Sonarr
-      - homepage.icon=sonarr
-      - homepage.href=http://${SERVER_IP}:8989
-      - homepage.description=TV Shows
-      - homepage.widget.type=sonarr
-      - homepage.widget.url=http://${SERVER_IP}:8989
-      - homepage.widget.key=YOUR_SONARR_API_KEY
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -70,12 +42,6 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
-    labels:
-      - homepage.group=Management
-      - homepage.name=Prowlarr
-      - homepage.icon=prowlarr
-      - homepage.href=http://${SERVER_IP}:9696
-      - homepage.description=Indexers
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -89,16 +55,6 @@ services:
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
-    labels:
-      - homepage.group=Download
-      - homepage.name=qBittorrent
-      - homepage.icon=qbittorrent
-      - homepage.href=http://${SERVER_IP}:8080
-      - homepage.description=Torrents
-      - homepage.widget.type=qbittorrent
-      - homepage.widget.url=http://${SERVER_IP}:8080
-      - homepage.widget.username=admin
-      - homepage.widget.password=YOUR_QBIT_PASSWORD
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -116,12 +72,6 @@ services:
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
-    labels:
-      - homepage.group=System
-      - homepage.name=Portainer
-      - homepage.icon=portainer
-      - homepage.href=http://${SERVER_IP}:9000
-      - homepage.description=Docker Manager
     ports:
       - "9000:9000"
     volumes:
@@ -134,6 +84,13 @@ services:
     container_name: homepage
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
+      # Pass all variables for YAML substitution
+      - SERVER_IP=${SERVER_IP}
+      - RADARR_API_KEY=${RADARR_API_KEY}
+      - SONARR_API_KEY=${SONARR_API_KEY}
+      - JELLYFIN_API_KEY=${JELLYFIN_API_KEY}
+      - QBIT_PASSWORD=${QBIT_PASSWORD}
+      - PORTAINER_API_KEY=${PORTAINER_API_KEY}
     ports:
       - "3000:3000"
     volumes:
