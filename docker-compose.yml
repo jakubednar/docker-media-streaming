@@ -84,7 +84,6 @@ services:
     container_name: homepage
     environment:
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
-      # Pass all variables for YAML substitution
       - SERVER_IP=${SERVER_IP}
       - RADARR_API_KEY=${RADARR_API_KEY}
       - SONARR_API_KEY=${SONARR_API_KEY}
@@ -94,6 +93,6 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./data/homepage:/app/config
+      - ./homepage:/app/config
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
